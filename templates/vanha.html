@@ -1,9 +1,8 @@
 {% if session.username %}
-<h1>Elokuva-arvostelu -sovellus</h1>
+<h1>Elokuva-arvostelut</h1>
 <p>
 <hr>
 <p>Olet kirjautunut sisään nimellä {{ session.username }}</p>
-
 <a href="/main">Siirry lukemaan ja tekemään arvosteluja</a>
 <p>
 <a href="/logout">Kirjaudu ulos</a>
@@ -13,8 +12,10 @@
 <hr>
 <h2>Kirjaudu sisään:</h2>
 <form action="/login" method="POST">
-Käyttäjätunnus: <input type="text" name="username"> <br>
-Salasana: <input type="password" name="password"> <br>
+<p>Käyttäjätunnus:<br>
+<input type="text" name="username"></p>
+<p>Salasana:<br>
+<input type="password" name="password"></p>
 <p>
 <input type="submit" value="Kirjaudu sisään">
 </form>

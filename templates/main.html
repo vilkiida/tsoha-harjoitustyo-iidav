@@ -1,0 +1,30 @@
+{% if session.username %}
+<h1>Elokuva-arvostelut</h1>
+<p>
+<p>Olet kirjautunut nimellä {{ session.username }}</p>
+<a href="/logout">Kirjaudu ulos</a>
+<hr>
+<h2>Elokuvat</h2>
+<p>
+elokuvat tähän...
+<p>
+<p>
+<hr>
+{% else %}
+<h1>Elokuva-arvostelut</h1>
+<p>
+<p>
+<hr>
+<h2>Kirjaudu sisään:</h2>
+<form action="/login" method="POST">
+<p>Käyttäjätunnus:<br>
+<input type="text" name="username"></p>
+<p>Salasana:<br>
+<input type="password" name="password"></p>
+<p>
+<input type="submit" value="Kirjaudu sisään">
+</form>
+{% endif %}
+
+
+
