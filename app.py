@@ -9,7 +9,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
 db = SQLAlchemy(app)
 app.secret_key = getenv("SECRET_KEY")
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def main():
 	sql = "SELECT id, name, year FROM movies ORDER BY year DESC"
 	result = db.session.execute(sql)
