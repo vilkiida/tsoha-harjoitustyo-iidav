@@ -22,7 +22,14 @@ CREATE TABLE reviews (
   review INTEGER,
   time, TIMESTAMP
 );
+
 #CREATE categories (
 #  id SERIAL PRIMARY KEY,
 #  name TEXT
 #);
+
+#CREATE movies_in_categories (
+#  category_id INTEGER,
+#  movie_id INTEGER
+#);
+
