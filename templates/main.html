@@ -4,12 +4,14 @@
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 <a href="/logout">Kirjaudu ulos</a>
 <hr>
-<h2>Elokuvat</h2>
-<p>
-elokuvat tähän...
-<p>
+<h2>Elokuvat:</h2>
 <p>
 <hr>
+{% for movie in movies %}
+<h3><a href="/movie_page/{{ movie[0] }}"> {{ movie[1] }} </a></h3>
+julkaistu: {{ movie[2] }}
+<hr>
+{% endfor %}
 {% else %}
 <h1>Elokuva-arvostelut</h1>
 <p>

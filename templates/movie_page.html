@@ -1,0 +1,23 @@
+<h1>Elokuva-arvostelut</h1>
+<p>
+<p>
+<hr>
+<h2>Elokuvan tiedot:</h2>
+<p>
+{% for info in information %}
+<h3>Nimi:</h3>
+{{ info[0] }}
+<h3>Julkaistu:</h3>
+{{ info[1] }}
+<h3>Genret:</h3>
+{{ info[2] }}
+<h3>Päärooleissa:</h3>
+{{ info[4] }}
+<h3>Kuvaus:</h3>
+{{ info[3] }}
+{% endfor %}
+<p>
+<hr>
+<h2>Arvostelut</h2>
+<p>
+arvostelut tähän...

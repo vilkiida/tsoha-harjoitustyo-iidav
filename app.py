@@ -11,7 +11,10 @@ app.secret_key = getenv("SECRET_KEY")
 
 @app.route("/")
 def main():
-	return render_template("main.html")
+	sql = "SELECT id, name, year FROM movies ORDER BY year DESC"
+	result = db.session.execute(sql)
+	movies = result.fetchall()
+	return render_template("main.html", movies=movies)
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -51,3 +54,10 @@ def new_account():
 	db.session.execute(sql, {"username":username, "password":hash_value})
 	db.session.commit()
 	return render_template("new_account.html")
+
+@app.route("/movie_page/<int:id>")
+def movie_page(id):
+	sql="SELECT name, year, genre, description, leading_roles FROM Movies WHERE id=:id"
+	result = db.session.execute(sql, {"id":id})
+	information = result.fetchall()
+	return render_template("movie_page.html", information=information)
