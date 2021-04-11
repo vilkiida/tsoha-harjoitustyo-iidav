@@ -15,6 +15,14 @@ Lisää sovelluksen ominaisuuksista:
 ## Nykytilanne (välipalautus 2):
 Tällähetkellä sovellukseen voi luoda tunnuksen ja kirjautua sillä sisään. Sisäänkirjauduttua sovellukseen etusivulla näkee uutuusjärjestyksessä elokuvia ja niitä klikkaamalla pääsee sivulle, jossa on listattuna tiedot niistä. Samalla sivulla on myös merkitty kohta arvosteluille, joita ei kuitenkaan vielä pysty kirjoittamaan ja lukemaan. Huom! kirjautuminen toimii muuten tavallisesti, mutta kun kirjoitetaan väärä salasana tai käyttäjätunnus, sovellus uudelleenohjautuu takaisin kirjautumis sivulle ilman, että kertoo kumpi näistä meni väärin. Lisään puuttuvat ominaisuudet pian, mutta ei välttämättä ehdi vielä ennen välipalautuksen 2 deadlinea. Näistä puuttuvista ominaisuuksista ehkä merkittävimpiä arvostelujen näkyminen elokuvien tietosivuilla ja niiden kirjoittamis mahdollisuus sekä hakusanalla elokuvien etsimis mahdollisuus. 
 
+#### lista muista muokkauksista/lisäyksista joita tulen mm. vielä tekemään:
+- käyttäjätunnuksen täytyy olla unique. Eli users taulukkoon tulee lisätä, että "... username TEXT UNIQUE ..."
+- elokuvien tietoihin mukaan kansikuvat!
+- kategoriat!
+- mahdollisuus saada elokuvat näkymään myös arvosanan mukaan paremmuus järjestyksessä uutuus järjestyksen lisäksi.
+- ylläpitäjien oikeudet
+- parempi ulkoasu
+
 ## Testaa sovellusta:
 [Herokussa](https://tsoha-harjoitustyo-iidav.herokuapp.com/)
 
