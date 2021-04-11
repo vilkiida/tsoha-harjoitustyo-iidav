@@ -12,8 +12,8 @@ Lisää sovelluksen ominaisuuksista:
 - Ylläpitäjä voi tarvittaessa poistaa käyttäjän antaman arvion.
 - Käyttäjä voi nähdä listan elokuvista halutessaan esimerkiksi uutuusjärjestyksessä tai arvostelujen mukaisessa paremmuus järjestyksessä.
 
-## Nykytilanne:
-Tällähetkellä sovellukseen voi luoda tunnuksen ja kirjautua sillä sisään. Sisäänkirjauduttua sovellukseen etusivulla näkee uutuusjärjestyksessä elokuvia ja niitä klikkaamalla pääsee sivulle, jossa on listattuna tiedot niistä. Samalla sivulla on myös merkitty kohta arvosteluille, joita ei kuitenkaan vielä pysty kirjoittamaan ja lukemaan. Huom! kirjautuminen toimii muuten tavallisesti, mutta kun kirjoitetaan väärä salasana tai käyttäjätunnus, sovellus uudelleenohjautuu takaisin kirjautumis sivulle ilman, että kertoo kumpi näistä meni väärin. Lisään nämä puuttuvat asiat kuitenkin pian.
+## Nykytilanne (välipalautus 2):
+Tällähetkellä sovellukseen voi luoda tunnuksen ja kirjautua sillä sisään. Sisäänkirjauduttua sovellukseen etusivulla näkee uutuusjärjestyksessä elokuvia ja niitä klikkaamalla pääsee sivulle, jossa on listattuna tiedot niistä. Samalla sivulla on myös merkitty kohta arvosteluille, joita ei kuitenkaan vielä pysty kirjoittamaan ja lukemaan. Huom! kirjautuminen toimii muuten tavallisesti, mutta kun kirjoitetaan väärä salasana tai käyttäjätunnus, sovellus uudelleenohjautuu takaisin kirjautumis sivulle ilman, että kertoo kumpi näistä meni väärin. Lisään nämä puuttuvat pian, mutta ei välttämättä ehdi vielä ennen välipalautuksen 2 deadlinea.
 
 ## Testaa sovellusta:
 [Herokussa](https://tsoha-harjoitustyo-iidav.herokuapp.com/)
