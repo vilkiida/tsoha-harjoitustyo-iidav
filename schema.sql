@@ -22,3 +22,7 @@ CREATE TABLE reviews (
   review INTEGER,
   time, TIMESTAMP
 );
+#CREATE categories (
+#  id SERIAL PRIMARY KEY,
+#  name TEXT
+#);
