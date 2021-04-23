@@ -1,0 +1,20 @@
+<h1>Elokuva-arvostelut</h1>
+<p>
+<p>Olet kirjautunut nimellä {{ session.username }}</p>
+<p>
+<a href="/">Etusivulle</a><br>
+<a href="/logout">Kirjaudu ulos</a>
+<hr>
+<h2>Omat arvosteluni:</h2>
+<p>Arvosteluiden määrä: {{ number_of_reviews }}<br>
+<hr>
+{% for review in mine %}
+<h4>Elokuvalle {{ review[0] }} antamasi arvosana:   {{ review [2] }}<br>
+Arvio:
+</h4>
+{{ review[1] }}
+<p>
+{{ review[3] }}
+<hr>
+{% endfor %}
+

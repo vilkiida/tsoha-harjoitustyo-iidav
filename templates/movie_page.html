@@ -1,6 +1,8 @@
 <h1>Elokuva-arvostelut</h1>
 <p>
+<a href="/">Etusivulle</a>
 <p>
+<a href="/logout"> Kirjaudu ulos</a>
 <hr>
 <h2>Elokuvan tiedot:</h2>
 <p>
@@ -15,17 +17,40 @@
 {{ info[4] }}
 <h3>Kuvaus:</h3>
 {{ info[3] }}
-{% endfor %}
 <p>
 <hr>
 <h2>Arvostelut:</h2>
 <p>
-<a href="/new_review" >Luo arvostelu</a>
+<p>Arvostelujen määrä:  {{ amount_of_reviews }}<br>
+<p>Keskimääräinen arvosana: {{ average }}<br>
+<hr>
+<h3>Luo arvostelu:</h3>
+<form action="/new_review/{{ info[5] }}" method="POST">
+{% endfor %}
+<p>Arvosana:<br>
+<input type="radio" name="grade" value="0"> 0
+<input type="radio" name="grade" value="1"> 1
+<input type="radio" name="grade" value="2"> 2
+<input type="radio" name="grade" value="3"> 3
+<input type="radio" name="grade" value="4"> 4
+<input type="radio" name="grade" value="5"> 5
+<input type="radio" name="grade" value="6"> 6
+<input type="radio" name="grade" value="7"> 7
+<input type="radio" name="grade" value="8"> 8
+<input type="radio" name="grade" value="9"> 9
+<input type="radio" name="grade" value="10"> 10
+<p>Arvio:<br>
+<textarea name="review" rows="3" cols="50"></textarea>
+<p>
+<input type="submit" value="Julkaise">
+</form>
+<hr>
 {% for review in reviews %}
-<h4>Käyttäjältä {{ review[0] }}  arvosana: {{ review [2] }}
+<h4>Käyttäjä {{ review[0] }}  antoi elokuvalle arvosanaksi: {{ review [2] }}<br>
 Arvio:
-{{ review[1] }}
 </h4>
+{{ review[1] }}
+<p>
 {{ review[3] }}
 <hr>
 {% endfor %}
