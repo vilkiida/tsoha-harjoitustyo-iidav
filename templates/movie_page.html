@@ -18,6 +18,14 @@
 {% endfor %}
 <p>
 <hr>
-<h2>Arvostelut</h2>
+<h2>Arvostelut:</h2>
 <p>
-arvostelut tähän...
+<a href="/new_review" >Luo arvostelu</a>
+{% for review in reviews %}
+<h4>Käyttäjältä {{ review[0] }}  arvosana: {{ review [2] }}
+Arvio:
+{{ review[1] }}
+</h4>
+{{ review[3] }}
+<hr>
+{% endfor %}
