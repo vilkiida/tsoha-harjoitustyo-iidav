@@ -1,12 +1,12 @@
 <h1>Elokuva-arvostelut</h1>
 <p>
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
+<p>Olet kirjautunut ylläpitäjänä nimellä {{ session.username }}</p>
 <p>
 <a href="/">Etusivulle</a><br>
 <a href="/logout">Kirjaudu ulos</a>
 <hr>
-<h2>Ehdota elokuvaa:</h2>
-<form action="/new_suggestion" method="POST">
+<h2>Lisää uusi elokuva:</h2>
+<form action="/new_movie" method="POST">
 <p>Elokuvan nimi:<br>
 <textarea name="name" rows="1" cols="40"></textarea>
 <p>Elokuvan julkaisuvuosi:<br>
@@ -18,5 +18,6 @@
 <p>Elokuvan pääroolit:<br>
 <textarea name="leading_roles" rows="2" cols="50"></textarea>
 <p>
-<input type="submit" value="Ehdota">
+<input type="submit" value="Julkaise">
 </form>
+

@@ -60,14 +60,28 @@ def my_reviews():
 
 @app.route("/suggest_movies")
 def suggest_movies():
-    name=request.form["name"]
-    year=request.form["year"]
-    genres=request.form["genre"]
-    description=request.form["description"]
-    leading_roles=reguest.form["leading_roles"]
-    suggestions.make_suggestion(name, year, genres, description, leading_roles)
     return render_template("suggest_movies.html")
 
 @app.route("/new_suggestion", methods=["POST"])
 def new_suggestion():
+    name=request.form["name"]
+    year=request.form["year"]
+    genres=request.form["genre"]
+    description=request.form["description"]
+    leading_roles=request.form["leading_roles"]
+    suggestions.make_suggestion(name, year, genres, description, leading_roles)
     return render_template("new_suggestion.html")
+
+@app.route("/add_movie")
+def add_movie():
+    return render_template("add_movie.html")
+
+@app.route("/new_movie", methods=["POST"])
+def new_movie():
+    name=request.form["name"]
+    year=request.form["year"]
+    genres=request.form["genre"]
+    description=request.form["description"]
+    leading_roles=request.form["leading_roles"]
+    movies.add_movie(name,year,genres,description,leading_roles)
+    return render_template("new_movie.html")
