@@ -25,7 +25,7 @@
 <p>Keskimääräinen arvosana: {{ average }}<br>
 <hr>
 <h3>Luo arvostelu:</h3>
-<form action="/new_review/{{ info[5] }}" method="POST">
+<form action="/new_review" method="POST">
 {% endfor %}
 <p>Arvosana:<br>
 <input type="radio" name="grade" value="0"> 0
@@ -41,6 +41,7 @@
 <input type="radio" name="grade" value="10"> 10
 <p>Arvio:<br>
 <textarea name="review" rows="3" cols="50"></textarea>
+<input type="hidden" name="movie_id" value={{ id }}>
 <p>
 <input type="submit" value="Julkaise">
 </form>
@@ -52,5 +53,11 @@ Arvio:
 {{ review[1] }}
 <p>
 {{ review[3] }}
+{% if session.user_role == True %}
+<form action="/delete" method="POST">
+<input type="hidden" name="review_id" value={{ review[4] }}>
+<input type="hidden" name="movie_id" value={{ id }}>
+<input type="submit" value="Poista">
+{% endif %}
 <hr>
 {% endfor %}

@@ -1,0 +1,18 @@
+<h1>Elokuva-arvostelut</h1>
+<p>
+<a href="/">Etusivulle</a>
+<p>
+<a href="/logout"> Kirjaudu ulos</a>
+<hr>
+{% if session.user_role == True %}
+<p>
+<a href="/delete_category">Poista kategoria</a>
+{% endif %}
+<h2>Elokuvat kategoriassa {{ category_name }}:</h2>
+<hr>
+{% for movie in movies %}
+<h3><a href="/movie_page/{{ movie[2] }}">{{ movie[0] }}</a></h3>
+Julkaistu: {{ movie[1] }}
+<hr>
+{% endfor %}
+

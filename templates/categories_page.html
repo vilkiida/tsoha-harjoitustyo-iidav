@@ -1,0 +1,18 @@
+<h1>Elokuva-arvostelut</h1>
+<p>
+<a href="/">Etusivulle</a>
+<p>
+<a href="/logout"> Kirjaudu ulos</a>
+<hr>
+{% if session.user_role == True %}
+<p>
+<a href="/add_category">Lisää kategoria</a>
+{% endif %}
+<h2>Kategoriat:</h2>
+<p>
+<hr>
+{% for category in categories %}
+<h3><a href="/category_page/{{ category[0] }}">{{ category[1] }}</a>
+</h3>
+<hr>
+{% endfor %}

@@ -1,7 +1,7 @@
 from db import db
 from flask import session
 def get_reviews(movie_id):
-	sql= "SELECT u.username, r.review, r.grade, r.time FROM reviews r, users u where movie_id=:movie_id and u.id=r.user_id"
+	sql= "SELECT u.username, r.review, r.grade, r.time, r.id FROM reviews r, users u where movie_id=:movie_id and u.id=r.user_id"
 	result = db.session.execute(sql, {"movie_id":movie_id})
 	reviews = result.fetchall()
 	return reviews
@@ -47,3 +47,9 @@ def get_number_of_reviews():
 		return number_of_reviews
 	else:
 		return 0
+
+def delete_review(id):
+	sql="DELETE FROM reviews WHERE id=:id"
+	db.session.execute(sql, {"id":id})
+	db.session.commit()
+

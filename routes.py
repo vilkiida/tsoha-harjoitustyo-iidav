@@ -3,6 +3,7 @@ import movies
 import users
 import reviews
 import suggestions
+import categories
 from flask import redirect, render_template, request
 
 @app.route("/", methods = ["GET"])
@@ -41,16 +42,16 @@ def movie_page(id):
     review_list = reviews.get_reviews(id)
     amount_of_reviews = reviews.get_amount(id)
     average= reviews.get_average(id)
-    return render_template("movie_page.html", information=info,reviews=review_list, amount_of_reviews=amount_of_reviews, average=average)
+    return render_template("movie_page.html", information=info,reviews=review_list, amount_of_reviews=amount_of_reviews, average=average, id=id)
 
 
-@app.route("/new_review/<int:id>", methods=["POST"])
-def new_review(id):
-    movie_id=id
+@app.route("/new_review", methods=["POST"])
+def new_review():
+    movie_id=request.form["movie_id"]
     grade = request.form["grade"]
     review = request.form["review"]
     reviews.create_review(movie_id, grade, review)
-    return redirect("/movie_page/"+ str(id))
+    return redirect("/movie_page/"+ str(movie_id))
 
 @app.route("/my_reviews")
 def my_reviews():
@@ -85,3 +86,40 @@ def new_movie():
     leading_roles=request.form["leading_roles"]
     movies.add_movie(name,year,genres,description,leading_roles)
     return render_template("new_movie.html")
+
+@app.route("/suggestions")
+def suggestion_page():
+    suggestion_list=suggestions.get_suggestions()
+    number_of_suggestions=suggestions.get_number_of_suggestions()
+    return render_template("suggestions.html", suggestions=suggestion_list, number_of_suggestions=number_of_suggestions)
+ 
+@app.route("/accept", methods=["POST"])
+def accept():
+    id=request.form["id"]
+    suggestions.accept(id)
+    return redirect ("/suggestions")
+
+@app.route("/decline", methods=["POST"])
+def decline():
+    id=request.form["id"]
+    suggestions.decline(id)
+    return redirect ("/suggestions")
+
+@app.route("/delete", methods=["POST"])
+def delete():
+    id=request.form["review_id"]
+    movie_id=request.form["movie_id"]
+    reviews.delete_review(id)
+    return redirect ("/movie_page/" + str(movie_id))
+
+@app.route("/categories")
+def categories_page():
+    category_list=categories.get_categories()
+    return render_template("categories_page.html", categories=category_list)
+
+
+@app.route("/category_page/<int:id>")
+def category_page(id):
+    movie_list=categories.get_category_contents(id)
+    category_name=categories.get_category_name(id)
+    return render_template("category_page.html", movies=movie_list, category_name=category_name)
