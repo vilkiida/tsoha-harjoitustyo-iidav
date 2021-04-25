@@ -1,7 +1,31 @@
 from db import db
 
 def get_movie_list():
+	sql = "SELECT id, name, year FROM movies ORDER BY id DESC"
+	result = db.session.execute(sql)
+	movies = result.fetchall()
+	return movies
+
+def get_movie_list_newest():
 	sql = "SELECT id, name, year FROM movies ORDER BY year DESC"
+	result = db.session.execute(sql)
+	movies = result.fetchall()
+	return movies
+
+def get_movie_list_oldest():
+	sql = "SELECT id, name, year FROM movies ORDER BY year"
+	result = db.session.execute(sql)
+	movies = result.fetchall()
+	return movies
+
+def get_movie_list_best():
+	sql="SELECT m.id, m.name, m.year FROM movies m, (SELECT movie_id, AVG(grade) as tulos from reviews group by movie_id) k where k.movie_id=m.id ORDER BY tulos DESC"
+	result = db.session.execute(sql)
+	movies = result.fetchall()
+	return movies
+	
+def get_movie_list_worst():
+	sql="SELECT m.id, m.name, m.year FROM movies m, (SELECT movie_id, AVG(grade) as tulos from reviews group by movie_id) k where k.movie_id=m.id ORDER BY tulos"
 	result = db.session.execute(sql)
 	movies = result.fetchall()
 	return movies
@@ -21,7 +45,7 @@ def add_movie(name,year,genre,description,leading_roles):
 		except:
 			return False
 		return True
-		
+
 def search_movie(query):
 	sql="SELECT id, name, year, description from movies where name LIKE :query or description LIKE :query"
 	result=db.session.execute(sql, {"query":"%"+query+"%"})

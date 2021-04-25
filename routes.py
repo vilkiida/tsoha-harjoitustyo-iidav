@@ -6,10 +6,27 @@ import suggestions
 import categories
 from flask import redirect, render_template, request
 
-@app.route("/", methods = ["GET"])
+@app.route("/", methods = ["GET","POST"])
 def main():
-	movie_list = movies.get_movie_list()
-	return render_template("main.html", movies=movie_list)
+    if request.method == "GET":
+	    movie_list = movies.get_movie_list()
+	    return render_template("main.html", movies=movie_list)
+
+    if request.method == "POST":
+        sort=request.form.get("sort")
+        if sort == "newest":
+            movie_list=movies.get_movie_list_newest()
+        elif sort == "oldest":
+            movie_list=movies.get_movie_list_oldest()
+        elif sort == "best":
+            movie_list=movies.get_movie_list_best()
+        elif sort == "worst":
+            movie_list=movies.get_movie_list_worst()
+        elif sort == "latest":
+            movie_list = movies.get_movie_list()
+        else:
+            movie_list = movies.get_movie_list()
+        return render_template("main.html", movies=movie_list)
 
 @app.route("/login", methods=["POST"])
 def login():
