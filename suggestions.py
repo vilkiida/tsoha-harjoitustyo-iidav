@@ -2,11 +2,15 @@ from db import db
 from flask import session
 
 def make_suggestion(name, year, genre, description, leading_roles):
-	year=int(year)
-	user_id=session["user_id"]
-	sql="INSERT INTO suggestions (name,year,genre,description,leading_roles, user_id, time,accepted) VALUES (:name, :year, :genre, :description, :leading_roles, :user_id, NOW(),0)"
-	db.session.execute(sql, {"name":name, "year":year, "genre":genre, "description":description, "leading_roles":leading_roles, "user_id":user_id})
-	db.session.commit()
+	try:
+		year=int(year)
+		user_id=session["user_id"]
+		sql="INSERT INTO suggestions (name,year,genre,description,leading_roles, user_id, time,accepted) VALUES (:name, :year, :genre, :description, :leading_roles, :user_id, NOW(),0)"
+		db.session.execute(sql, {"name":name, "year":year, "genre":genre, "description":description, "leading_roles":leading_roles, "user_id":user_id})
+		db.session.commit()
+	except:
+		return False
+	return True
 
 def get_suggestions():
 	sql="SELECT s.name, s.year, s.genre, s.description, s.leading_roles, u.username, s.time, s.id from suggestions s, users u where s.user_id=u.id and accepted=0 order by s.time"

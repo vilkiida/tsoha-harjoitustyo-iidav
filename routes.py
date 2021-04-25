@@ -25,16 +25,25 @@ def logout():
     users.logout()
     return redirect("/")
 
-@app.route("/make_account")
-def make_account():
-    return render_template("make_account.html")
-
-@app.route("/new_account", methods=["POST"])
-def new_account():
-    username = request.form["username"]
-    password = request.form["password"]
-    users.new_account(username,password)
-    return render_template("new_account.html")
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "GET":
+        return render_template("make_account.html")
+    
+    if request.method == "POST":
+        username=request.form["username"]
+        password=request.form["password"]
+        if users.username_exists_already(username):
+            return render_template ("register_error.html", message="Käyttäjätunnus on varattu.")
+        if len(username) > 20 or len(username) < 1:
+            return render_template("register_error.html", message="Käyttäjätunnuksen täytyy olla 1-20 merkkiä.")
+        if password == "":
+            return render_template("register_error.html", message="Salasana on tyhjä.")
+        
+        if users.register(username,password):
+            return redirect("/")
+        else:
+            return render_template("register_error.html", message="Uuden tunnuksen luonti epäonnistui.")
 
 @app.route("/movie_page/<int:id>")
 def movie_page(id):
@@ -49,6 +58,8 @@ def movie_page(id):
 def new_review():
     movie_id=request.form["movie_id"]
     grade = request.form["grade"]
+    if grade == None:
+        return redirect("/movie_page/"+ str(movie_id))
     review = request.form["review"]
     reviews.create_review(movie_id, grade, review)
     return redirect("/movie_page/"+ str(movie_id))
@@ -66,26 +77,51 @@ def suggest_movies():
 @app.route("/new_suggestion", methods=["POST"])
 def new_suggestion():
     name=request.form["name"]
+    if len(name) < 1 or len(name) > 177:
+        return render_template("suggestion_error.html", message="Elokuvan nimi pitää olla 1-177 merkkiä.")
     year=request.form["year"]
+    if len(year) != 4:
+            return render_template("suggestion_error.html", message="Vuosiluvussa pitää olla 4 numeroa")
     genres=request.form["genre"]
+    if genres == "":
+            return render_template("suggestion_error.html", message="Elokuvalla pitää olla edes yksi genre")
     description=request.form["description"]
+    if description == "":
+            return render_template("suggestion_error.html", message="Elokuvalla pitää olla kuvaus")
     leading_roles=request.form["leading_roles"]
-    suggestions.make_suggestion(name, year, genres, description, leading_roles)
-    return render_template("new_suggestion.html")
+    if leading_roles == "":
+            return render_template("add_movie_error.html", message="Elokuvalla pitää olla edes yksi päärooli")
 
-@app.route("/add_movie")
+    if suggestions.make_suggestion(name, year, genres, description, leading_roles):
+        return render_template("new_suggestion.html")
+    else:
+        return render_template("suggestion_error.html", message="Ehdotuksen lisääminen epäonnistui")
+
+@app.route("/add_movie", methods=["GET","POST"])
 def add_movie():
-    return render_template("add_movie.html")
+    if request.method == "GET":
+        return render_template("add_movie.html")
+    if request.method == "POST":
+        name=request.form["name"]
+        if len(name) < 1 or len(name) > 177:
+            return render_template("add_movie_error.html", message="Elokuvan nimi pitää olla 1-177 merkkiä.")
+        year=request.form["year"]
+        if len(year) != 4:
+            return render_template("add_movie_error.html", message="Vuosiluvussa pitää olla 4 numeroa")
+        genres=request.form["genre"]
+        if genres == "":
+            return render_template("add_movie_error.html", message="Elokuvalla pitää olla edes yksi genre")
+        description=request.form["description"]
+        if description == "":
+            return render_template("add_movie_error.html", message="Elokuvalla pitää olla kuvaus")
+        leading_roles=request.form["leading_roles"]
+        if leading_roles == "":
+            return render_template("add_movie_error.html", message="Elokuvalla pitää olla edes yksi päärooli")
 
-@app.route("/new_movie", methods=["POST"])
-def new_movie():
-    name=request.form["name"]
-    year=request.form["year"]
-    genres=request.form["genre"]
-    description=request.form["description"]
-    leading_roles=request.form["leading_roles"]
-    movies.add_movie(name,year,genres,description,leading_roles)
-    return render_template("new_movie.html")
+        if movies.add_movie(name,year,genres, description, leading_roles):
+            return redirect ("/")
+        else:
+            return render_template("add_movie_error.html", message="Elokuvan lisäys epäonnistui")
 
 @app.route("/suggestions")
 def suggestion_page():
