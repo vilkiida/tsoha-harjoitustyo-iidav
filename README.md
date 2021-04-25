@@ -22,8 +22,8 @@ Lisää sovelluksen ominaisuuksista:
 [Herokussa](https://tsoha-harjoitustyo-iidav.herokuapp.com/)
 
 
-Sovelllusta voi testata ylläpitäjänä tunnuksilla:
- Käyttäjätunnus: 'ylläpitäjä'
- Salasana: 'ylläpitäjä'
+Sovelluksella on tällä hetkellä vain yksi ylläpitäjä käyttäjä. Ylläpitäjänä sovellusta voi testata tunnuksilla:
+- Käyttäjätunnus: 'ylläpitäjä'
+- Salasana: 'ylläpitäjä'
 
 
