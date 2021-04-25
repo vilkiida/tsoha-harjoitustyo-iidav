@@ -2,7 +2,7 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username TEXT,
   password TEXT,
-  ADMINISTRATOR BOOLEAN
+  admin BOOLEAN
 );
 
 CREATE TABLE movies (
@@ -19,17 +19,29 @@ CREATE TABLE reviews (
   user_id iNTEGER,
   movie_id INTEGER,
   grade iNTEGER,
-  review INTEGER,
+  review TEXT,
   time, TIMESTAMP
 );
 
-#CREATE categories (
-#  id SERIAL PRIMARY KEY,
-#  name TEXT
-#);
+CREATE TABLE suggestions (
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  year INTEGER,
+  genre TEXT,
+  description TEXT,
+  leading_roles TEXT,
+  user_id INTEGER,
+  time TIMESTAMP,
+  accepted INTEGER
+);
 
-#CREATE movies_in_categories (
-#  category_id INTEGER,
-#  movie_id INTEGER
-#);
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY,
+  name TEXT
+);
+
+CREATE TABLE movies_in_categories (
+  category_id INTEGER,
+  movie_id INTEGER
+);
 
