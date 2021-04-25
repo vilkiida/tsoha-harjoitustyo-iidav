@@ -14,12 +14,25 @@
 <a href="/suggestions">Katso ehdotukset</a>
 {% endif %}
 <hr>
+<form action="/search_results" method="GET">
+Haku:
+<input type="text" name="query">
+<input type="submit" value="Hae">
+</form>
+<hr>
 <h2>Elokuvat:</h2>
 <p>
 <hr>
 {% for movie in movies %}
 <h3><a href="/movie_page/{{ movie[0] }}"> {{ movie[1] }} </a></h3>
 julkaistu: {{ movie[2] }}
+{% if session.user_role == True %}
+<form action="/delete_movie" method="POST">
+<p>
+<input type="hidden" name="movie_id" value={{movie[0]}}>
+<input type="submit" value="Poista">
+</form>
+{% endif %}
 <hr>
 {% endfor %}
 {% else %}

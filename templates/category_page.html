@@ -3,16 +3,35 @@
 <a href="/">Etusivulle</a>
 <p>
 <a href="/logout"> Kirjaudu ulos</a>
-<hr>
 {% if session.user_role == True %}
+<hr>
 <p>
-<a href="/delete_category">Poista kategoria</a>
+<form action="/delete_category" method="POST">
+<input type="hidden" name="category_id" value={{ id }}>
+<input type="submit" value="Poista kategoria">
+</form>
+<p>
+<form action="/movie_to_category" method="POST">
+<input type="hidden" name="category_id" value={{ id }}>
+Elokuvan nimi:  
+<textarea name="movie_name" rows="1" cols="40"></textarea>
+<p>
+<input type="submit" value="Lisää elokuva kategoriaan {{ category_name }}">
+</form>
 {% endif %}
+<hr>
 <h2>Elokuvat kategoriassa {{ category_name }}:</h2>
 <hr>
 {% for movie in movies %}
 <h3><a href="/movie_page/{{ movie[2] }}">{{ movie[0] }}</a></h3>
 Julkaistu: {{ movie[1] }}
+{% if session.user_role == True %}
+<form action="/delete_movie" method="POST">
+<p>
+<input type="hidden" name="movie_id" value={{movie[2]}}>
+<input type="submit" value="Poista">
+</form>
+{% endif %}
 <hr>
 {% endfor %}
 

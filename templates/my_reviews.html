@@ -15,6 +15,11 @@ Arvio:
 {{ review[1] }}
 <p>
 {{ review[3] }}
+<p>
+<form action="/delete_my_review" method="POST">
+<input type="hidden" name="review_id" value={{review[4]}}>
+<input type="submit" value="poista">
+</form>
 <hr>
 {% endfor %}
 

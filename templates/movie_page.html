@@ -54,7 +54,7 @@ Arvio:
 <p>
 {{ review[3] }}
 {% if session.user_role == True %}
-<form action="/delete" method="POST">
+<form action="/delete_review" method="POST">
 <input type="hidden" name="review_id" value={{ review[4] }}>
 <input type="hidden" name="movie_id" value={{ id }}>
 <input type="submit" value="Poista">

@@ -5,8 +5,15 @@
 <a href="/logout"> Kirjaudu ulos</a>
 <hr>
 {% if session.user_role == True %}
+<h3>Lisää uusi kategoria:</h3>
 <p>
-<a href="/add_category">Lisää kategoria</a>
+<form action="/add_category" method="POST">
+Nimi:
+<textarea name="category_name" rows="1" cols="30"></textarea>
+<p>
+<input type="submit" value="Lisää katogorioihin">
+</form>
+<hr>
 {% endif %}
 <h2>Kategoriat:</h2>
 <p>

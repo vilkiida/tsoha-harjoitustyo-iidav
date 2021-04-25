@@ -105,12 +105,18 @@ def decline():
     suggestions.decline(id)
     return redirect ("/suggestions")
 
-@app.route("/delete", methods=["POST"])
-def delete():
+@app.route("/delete_review", methods=["POST"])
+def delete_review():
     id=request.form["review_id"]
     movie_id=request.form["movie_id"]
     reviews.delete_review(id)
     return redirect ("/movie_page/" + str(movie_id))
+
+@app.route("/delete_my_review", methods=["POST"])
+def delete_my_review():
+    id=request.form["review_id"]
+    reviews.delete_review(id)
+    return redirect ("/my_reviews")
 
 @app.route("/categories")
 def categories_page():
@@ -122,4 +128,36 @@ def categories_page():
 def category_page(id):
     movie_list=categories.get_category_contents(id)
     category_name=categories.get_category_name(id)
-    return render_template("category_page.html", movies=movie_list, category_name=category_name)
+    return render_template("category_page.html", movies=movie_list, category_name=category_name, id=id)
+
+@app.route("/delete_category", methods=["POST"])
+def delete_category():
+    category_id=request.form["category_id"]
+    categories.delete_category(category_id)
+    return redirect ("/categories")
+
+@app.route("/movie_to_category", methods=["POST"])
+def movie_to_category():
+    category_id=request.form["category_id"]
+    print(category_id)
+    movie_name=request.form["movie_name"]
+    categories.movie_to_category(category_id, movie_name)
+    return redirect ("/category_page/" + str(category_id))
+
+@app.route("/add_category", methods=["POST"])
+def add_category():
+    name=request.form["category_name"]
+    categories.add_category(name)
+    return redirect ("/categories")
+
+@app.route("/search_results")
+def serach_results():
+    query=request.args["query"]
+    results=movies.search_movie(query)
+    return render_template("search_results.html", results=results)
+
+@app.route("/delete_movie", methods=["POST"])
+def delete_movie():
+    movie_id=request.form["movie_id"]
+    movies.delete_movie(movie_id)
+    return redirect("/")
