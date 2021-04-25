@@ -28,10 +28,17 @@ def delete_category(id):
 def movie_to_category(id, movie_name):
 	sql="SELECT id from movies where name=:movie_name"
 	result=db.session.execute(sql, {"movie_name":movie_name})
-	movie_id=result.fetchone()[0]
-	sql2="INSERT INTO movies_in_categories VALUES (:id,:movie_id)"
-	db.session.execute(sql2, {"id":id, "movie_id":movie_id})
-	db.session.commit()
+	movie_id=result.fetchone()
+	if movie_id == None:
+		return False
+	movie_id=movie_id[0]
+	try:
+		sql2="INSERT INTO movies_in_categories VALUES (:id,:movie_id)"
+		db.session.execute(sql2, {"id":id, "movie_id":movie_id})
+		db.session.commit()
+	except:
+		return False
+	return True
 
 def add_category(name):
 	sql="INSERT INTO categories (name) VALUES (:name)"

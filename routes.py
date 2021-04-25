@@ -198,10 +198,11 @@ def delete_category():
 def movie_to_category():
     users.require_admin()
     category_id=request.form["category_id"]
-    print(category_id)
     movie_name=request.form["movie_name"]
-    categories.movie_to_category(category_id, movie_name)
-    return redirect ("/category_page/" + str(category_id))
+    if categories.movie_to_category(category_id, movie_name):
+        return redirect ("/category_page/" + str(category_id))
+    else:
+        return redirect ("/category_page/" + str(category_id))
 
 @app.route("/add_category", methods=["POST"])
 def add_category():
