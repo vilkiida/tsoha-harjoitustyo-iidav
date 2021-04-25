@@ -99,6 +99,7 @@ def new_suggestion():
 
 @app.route("/add_movie", methods=["GET","POST"])
 def add_movie():
+    users.require_admin()
     if request.method == "GET":
         return render_template("add_movie.html")
     if request.method == "POST":
@@ -131,18 +132,21 @@ def suggestion_page():
  
 @app.route("/accept", methods=["POST"])
 def accept():
+    users.require_admin()
     id=request.form["id"]
     suggestions.accept(id)
     return redirect ("/suggestions")
 
 @app.route("/decline", methods=["POST"])
 def decline():
+    users.require_admin()
     id=request.form["id"]
     suggestions.decline(id)
     return redirect ("/suggestions")
 
 @app.route("/delete_review", methods=["POST"])
 def delete_review():
+    users.require_admin()
     id=request.form["review_id"]
     movie_id=request.form["movie_id"]
     reviews.delete_review(id)
@@ -168,12 +172,14 @@ def category_page(id):
 
 @app.route("/delete_category", methods=["POST"])
 def delete_category():
+    users.require_admin()
     category_id=request.form["category_id"]
     categories.delete_category(category_id)
     return redirect ("/categories")
 
 @app.route("/movie_to_category", methods=["POST"])
 def movie_to_category():
+    users.require_admin()
     category_id=request.form["category_id"]
     print(category_id)
     movie_name=request.form["movie_name"]
@@ -182,6 +188,7 @@ def movie_to_category():
 
 @app.route("/add_category", methods=["POST"])
 def add_category():
+    users.require_admin()
     name=request.form["category_name"]
     categories.add_category(name)
     return redirect ("/categories")
@@ -194,6 +201,7 @@ def serach_results():
 
 @app.route("/delete_movie", methods=["POST"])
 def delete_movie():
+    users.require_admin()
     movie_id=request.form["movie_id"]
     movies.delete_movie(movie_id)
     return redirect("/")

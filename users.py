@@ -44,4 +44,11 @@ def username_exists_already(username):
 	if exists == None:
 		return False
 	return True
-	
+
+def require_admin():
+	if session["user_role"] == False:
+		abort(403)
+
+#def check_csrf():
+#	if session["csrf_token"] != request.form["csrf_token"]:
+#		abort(403)
