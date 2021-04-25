@@ -1,7 +1,7 @@
 from db import db
 
 def get_categories():
-	sql="SELECT id, name FROM categories"
+	sql="SELECT id, name FROM categories ORDER BY name"
 	result=db.session.execute(sql)
 	category_list=result.fetchall()
 	return category_list
