@@ -22,6 +22,6 @@ Sovelluksella on tällä hetkellä vain yksi ylläpitäjä käyttäjä. Ylläpit
 - Käyttäjätunnus: 'ylläpitäjä'
 - Salasana: 'ylläpitäjä'
 
-Voit testata koodia [Herokussa](https://tsoha-harjoitustyo-iidav.herokuapp.com/).
+Voit testata sovellusta [Herokussa](https://tsoha-harjoitustyo-iidav.herokuapp.com/).
 
 
