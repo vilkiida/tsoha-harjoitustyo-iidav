@@ -20,7 +20,7 @@ CREATE TABLE reviews (
   movie_id INTEGER,
   grade iNTEGER,
   review TEXT,
-  time, TIMESTAMP
+  time TIMESTAMP
 );
 
 CREATE TABLE suggestions (
