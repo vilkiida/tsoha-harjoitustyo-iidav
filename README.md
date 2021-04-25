@@ -15,7 +15,7 @@ Lisää sovelluksen ominaisuuksista:
 - [ ] Listan elokuvista nähdä halutessaan joko uutuusjärjestyksessä tai arvostelujen arvosana keskiarvojen mukaisessa paremmuus järjestyksessä.
 
 ## Nykytilanne (välipalautus 3):
- 
+ Sovelluksesta löytyy kaikki toiminnallisuudet kansikuvia ja listan järjestys valintaa lukuunottamatta. Myöskin csrf-haavoittuvuuden estämis toimenpiteet ovat vielä vaiheessa. Lisäksi koodissa on vielä kohtia, jotka tarvitsevat lisää "virheviestejä" ja "try - except" kohtia jne. ja pientä hienosäätöä vielä kaivataan.
 
 ## Testaa sovellusta:
 [Herokussa](https://tsoha-harjoitustyo-iidav.herokuapp.com/)
