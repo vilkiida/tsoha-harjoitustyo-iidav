@@ -16,8 +16,8 @@ CREATE TABLE movies (
 
 CREATE TABLE reviews (
   id SERIAL PRIMARY KEY,
-  user_id iNTEGER,
-  movie_id INTEGER,
+  user_id iNTEGER REFERENCES users,
+  movie_id INTEGER REFERENCES movies,
   grade iNTEGER,
   review TEXT,
   time TIMESTAMP
@@ -30,7 +30,7 @@ CREATE TABLE suggestions (
   genre TEXT,
   description TEXT,
   leading_roles TEXT,
-  user_id INTEGER,
+  user_id INTEGER REFERENCES users,
   time TIMESTAMP,
   accepted INTEGER
 );
@@ -41,7 +41,7 @@ CREATE TABLE categories (
 );
 
 CREATE TABLE movies_in_categories (
-  category_id INTEGER,
-  movie_id INTEGER
+  category_id INTEGER REFERENCES categories,
+  movie_id INTEGER REFERENCES movies
 );
 
