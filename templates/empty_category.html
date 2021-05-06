@@ -24,17 +24,6 @@ Elokuvan nimi:
 <hr>
 <h2>Elokuvat kategoriassa {{ category_name }}:</h2>
 <hr>
-{% for movie in movies %}
-<h3><a href="/movie_page/{{ movie[2] }}">{{ movie[0] }}</a></h3>
-Julkaistu: {{ movie[1] }}
-{% if session.user_role == True %}
-<form action="/delete_movie" method="POST">
+<p>Kategoria on vielä tyhjä.
 <p>
-<input type="hidden" name="movie_id" value={{movie[2]}}>
-<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
-<input type="submit" value="Poista">
-</form>
-{% endif %}
-<hr>
-{% endfor %}
-
+<a href="/categories"> Takaisin kategorioihin</a>

@@ -31,9 +31,12 @@ def get_movie_list_worst():
 	return movies
 
 def get_movie_info(id):
-	sql="SELECT name, year, genre, description, leading_roles, id FROM Movies WHERE id=:id"
-	result = db.session.execute(sql, {"id":id})
-	information = result.fetchall()
+	try:
+		sql="SELECT name, year, genre, description, leading_roles, id FROM Movies WHERE id=:id"
+		result = db.session.execute(sql, {"id":id})
+		information = result.fetchall()
+	except:
+		return False
 	return information
 
 def add_movie(name,year,genre,description,leading_roles):

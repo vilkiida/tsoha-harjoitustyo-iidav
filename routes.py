@@ -62,24 +62,28 @@ def register():
         else:
             return render_template("register_error.html", message="Uuden tunnuksen luonti epäonnistui.")
 
-@app.route("/movie_page/<int:id>")
+@app.route("/movie_page/<int:id>", methods=["GET", "POST"])
 def movie_page(id):
-    info = movies.get_movie_info(id)
-    review_list = reviews.get_reviews(id)
-    amount_of_reviews = reviews.get_amount(id)
-    average= reviews.get_average(id)
-    return render_template("movie_page.html", information=info,reviews=review_list, amount_of_reviews=amount_of_reviews, average=average, id=id)
-
-
-@app.route("/new_review", methods=["POST"])
-def new_review():
-    movie_id=request.form["movie_id"]
-    grade = request.form["grade"]
-    if grade == None:
-        return redirect("/movie_page/"+ str(movie_id))
-    review = request.form["review"]
-    reviews.create_review(movie_id, grade, review)
-    return redirect("/movie_page/"+ str(movie_id))
+    if request.method == "GET":
+        if not movies.get_movie_info(id):
+            return render_template("issue.html", message="Valitettavasti elokuvaa ei löytynyt.")
+        info = movies.get_movie_info(id)
+        review_list = reviews.get_reviews(id)
+        amount_of_reviews = reviews.get_amount(id)
+        average= reviews.get_average(id)
+        return render_template("movie_page.html", information=info,reviews=review_list, amount_of_reviews=amount_of_reviews, average=average, id=id)
+    if request.method == "POST":
+        users.check_csrf()
+        movie_id=request.form["movie_id"]
+        grade = int(request.form["grade"])
+        review = request.form["review"]
+        if grade == 0 or grade == 1 or grade == 2 or grade == 3 or grade == 4 or grade == 5 or grade == 6 or grade == 7 or grade == 8 or grade == 9 or grade == 10:
+            if not reviews.create_review(movie_id, grade, review):
+                return render_template("review_issue.html", message="Arvostelun lisäys ei onnistunut", id=id)
+            else:
+                return redirect("/movie_page/"+ str(movie_id))
+        return render_template("review_issue.html", message="Arvostelussa pitää olla ainakin arvosana.", id=id)
+        
 
 @app.route("/my_reviews")
 def my_reviews():
@@ -93,6 +97,7 @@ def suggest_movies():
 
 @app.route("/new_suggestion", methods=["POST"])
 def new_suggestion():
+    users.check_csrf()
     name=request.form["name"]
     if len(name) < 1 or len(name) > 177:
         return render_template("suggestion_error.html", message="Elokuvan nimi pitää olla 1-177 merkkiä.")
@@ -120,6 +125,7 @@ def add_movie():
     if request.method == "GET":
         return render_template("add_movie.html")
     if request.method == "POST":
+        users.check_csrf()
         name=request.form["name"]
         if len(name) < 1 or len(name) > 177:
             return render_template("add_movie_error.html", message="Elokuvan nimi pitää olla 1-177 merkkiä.")
@@ -143,6 +149,7 @@ def add_movie():
 
 @app.route("/suggestions")
 def suggestion_page():
+    users.require_admin()
     suggestion_list=suggestions.get_suggestions()
     number_of_suggestions=suggestions.get_number_of_suggestions()
     return render_template("suggestions.html", suggestions=suggestion_list, number_of_suggestions=number_of_suggestions)
@@ -150,6 +157,7 @@ def suggestion_page():
 @app.route("/accept", methods=["POST"])
 def accept():
     users.require_admin()
+    users.check_csrf()
     id=request.form["id"]
     suggestions.accept(id)
     return redirect ("/suggestions")
@@ -157,6 +165,7 @@ def accept():
 @app.route("/decline", methods=["POST"])
 def decline():
     users.require_admin()
+    users.check_csrf()
     id=request.form["id"]
     suggestions.decline(id)
     return redirect ("/suggestions")
@@ -164,6 +173,7 @@ def decline():
 @app.route("/delete_review", methods=["POST"])
 def delete_review():
     users.require_admin()
+    users.check_csrf()
     id=request.form["review_id"]
     movie_id=request.form["movie_id"]
     reviews.delete_review(id)
@@ -171,6 +181,7 @@ def delete_review():
 
 @app.route("/delete_my_review", methods=["POST"])
 def delete_my_review():
+    users.check_csrf()
     id=request.form["review_id"]
     reviews.delete_review(id)
     return redirect ("/my_reviews")
@@ -183,13 +194,18 @@ def categories_page():
 
 @app.route("/category_page/<int:id>")
 def category_page(id):
-    movie_list=categories.get_category_contents(id)
+    if not categories.get_category_name(id):
+        return render_template("issue.html", message="Valitettavasti kategoriaa ei löydy")
     category_name=categories.get_category_name(id)
+    if not categories.get_category_contents(id):
+        return render_template("empty_category.html", category_name=category_name, id=id)
+    movie_list=categories.get_category_contents(id)
     return render_template("category_page.html", movies=movie_list, category_name=category_name, id=id)
 
 @app.route("/delete_category", methods=["POST"])
 def delete_category():
     users.require_admin()
+    users.check_csrf()
     category_id=request.form["category_id"]
     categories.delete_category(category_id)
     return redirect ("/categories")
@@ -197,6 +213,7 @@ def delete_category():
 @app.route("/movie_to_category", methods=["POST"])
 def movie_to_category():
     users.require_admin()
+    users.check_csrf()
     category_id=request.form["category_id"]
     movie_name=request.form["movie_name"]
     if categories.movie_to_category(category_id, movie_name):
@@ -207,6 +224,7 @@ def movie_to_category():
 @app.route("/add_category", methods=["POST"])
 def add_category():
     users.require_admin()
+    users.check_csrf()
     name=request.form["category_name"]
     categories.add_category(name)
     return redirect ("/categories")
@@ -220,6 +238,7 @@ def serach_results():
 @app.route("/delete_movie", methods=["POST"])
 def delete_movie():
     users.require_admin()
+    users.check_csrf()
     movie_id=request.form["movie_id"]
     movies.delete_movie(movie_id)
     return redirect("/")

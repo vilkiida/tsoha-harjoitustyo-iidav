@@ -10,12 +10,17 @@ def get_category_contents(id):
 	sql="SELECT m.name, m.year, m.id from movies_in_categories c, movies m where m.id=c.movie_id and c.category_id=:id"
 	result=db.session.execute(sql, {"id":id})
 	movie_list=result.fetchall()
+	if movie_list == []:
+		return False
 	return movie_list
 
 def get_category_name(id):
-	sql="SELECT name from categories where id=:id"
-	result=db.session.execute(sql, {"id":id})
-	category_name=result.fetchone()[0]
+	try:
+		sql="SELECT name from categories where id=:id"
+		result=db.session.execute(sql, {"id":id})
+		category_name=result.fetchone()[0]
+	except:
+		return False
 	return category_name
 
 def delete_category(id):

@@ -1,6 +1,6 @@
 from db import db
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask import session
+from flask import session, request
 import os
 
 def login(username,password):
@@ -49,6 +49,6 @@ def require_admin():
 	if session["user_role"] == False:
 		abort(403)
 
-#def check_csrf():
-#	if session["csrf_token"] != request.form["csrf_token"]:
-#		abort(403)
+def check_csrf():
+	if session["csrf_token"] != request.form["csrf_token"]:
+		abort(403)

@@ -18,10 +18,12 @@ Ehdotus käyttäjältä {{ suggestion[5] }}:
 <p>{{ suggestion[6] }}<br>
 <form action="/accept" method="POST">
 <input type="hidden" name="id" value={{ suggestion[7] }}>
+<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
 <input type="submit" value="Hyväksy">
 </form>
 <form action="/decline" method="POST">
 <input type="hidden" name="id" value={{ suggestion[7] }}>
+<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
 <input type="submit" value="Hylkää">
 </form>
 <hr>

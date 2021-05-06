@@ -18,6 +18,7 @@ Arvio:
 <p>
 <form action="/delete_my_review" method="POST">
 <input type="hidden" name="review_id" value={{review[4]}}>
+<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
 <input type="submit" value="poista">
 </form>
 <hr>
