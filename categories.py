@@ -49,3 +49,22 @@ def add_category(name):
 	sql="INSERT INTO categories (name) VALUES (:name)"
 	db.session.execute(sql, {"name":name})
 	db.session.commit()
+
+def check_movie_in_category(moviename, category_id):
+	sql="SELECT c.category_id from movies_in_categories c, movies m where m.id=c.movie_id and m.name=:moviename"
+	result=db.session.execute(sql, {"moviename":moviename})
+	id_s=result.fetchall()
+	if id_s != None:
+		for id in id_s:
+			if id[0] == category_id:
+				return True
+	return False
+
+def delete_movie_in_category(movie_id, category_id):
+	try:
+		sql="DELETE from movies_in_categories where movie_id=:movie_id and category_id=:category_id"
+		db.session.execute(sql, {"movie_id":movie_id, "category_id":category_id})
+		db.session.commit()
+	except:
+		return False
+	return True

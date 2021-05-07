@@ -65,3 +65,12 @@ def delete_movie(movie_id):
 	db.session.execute(sql2, {"movie_id":movie_id})
 	db.session.commit()
 
+def check_if_movie_exists(moviename):
+	sql="SELECT id from movies where name=:moviename"
+	result=db.session.execute(sql, {"moviename":moviename})
+	movie_id=result.fetchone()
+	if movie_id == None:
+		return False
+	else:
+		return True
+

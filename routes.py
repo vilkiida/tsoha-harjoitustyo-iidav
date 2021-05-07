@@ -216,10 +216,15 @@ def movie_to_category():
     users.check_csrf()
     category_id=request.form["category_id"]
     movie_name=request.form["movie_name"]
-    if categories.movie_to_category(category_id, movie_name):
+    print(categories.check_movie_in_category(movie_name, category_id))
+    if categories.check_movie_in_category(movie_name, category_id):
+        return render_template("category_issue.html", message="Elokuva on jo tässä kategoriassa", id=category_id)
+    if not movies.check_if_movie_exists(movie_name):
+        return render_template("category_issue.html", message="Elokuvaa ei löydy", id=category_id)
+    elif categories.movie_to_category(category_id, movie_name):
         return redirect ("/category_page/" + str(category_id))
     else:
-        return redirect ("/category_page/" + str(category_id))
+        return render_template("category_issue.html", message="Elokuvan lisääminen ei onnistunut", id=category_id)
 
 @app.route("/add_category", methods=["POST"])
 def add_category():
@@ -242,3 +247,14 @@ def delete_movie():
     movie_id=request.form["movie_id"]
     movies.delete_movie(movie_id)
     return redirect("/")
+
+@app.route("/delete_movie_from_category", methods=["POST"])
+def delete_movie_from_category():
+    users.require_admin()
+    users.check_csrf()
+    movie_id=request.form["movie_id"]
+    category_id=request.form["category_id"]
+    if categories.delete_movie_in_category(movie_id, category_id):
+        return redirect("/category_page/" + str(category_id))
+    else:
+        return render_template("category_issue.html", message="Elokuvan poistaminen kategoriasta epäonnistui", id=category_id)
