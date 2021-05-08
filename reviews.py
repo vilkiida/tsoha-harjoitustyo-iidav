@@ -1,7 +1,7 @@
 from db import db
 from flask import session
 def get_reviews(movie_id):
-	sql= "SELECT u.username, r.review, r.grade, r.time, r.id FROM reviews r, users u where movie_id=:movie_id and u.id=r.user_id"
+	sql= "SELECT u.username, r.review, r.grade, r.time, r.id, u.id FROM reviews r, users u where movie_id=:movie_id and u.id=r.user_id"
 	result = db.session.execute(sql, {"movie_id":movie_id})
 	reviews = result.fetchall()
 	return reviews

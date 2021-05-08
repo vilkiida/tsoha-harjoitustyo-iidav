@@ -176,9 +176,17 @@ def decline():
 
 @app.route("/delete_review", methods=["POST"])
 def delete_review():
+    users.check_csrf()
+    id=int(request.form["review_id"])
+    movie_id=request.form["movie_id"]
+    reviews.delete_review(id)
+    return redirect ("/movie_page/" + str(movie_id))
+
+@app.route("/delete_review_admin", methods=["POST"])
+def delete_review_admin():
     users.require_admin()
     users.check_csrf()
-    id=request.form["review_id"]
+    id=int(request.form["review_id"])
     movie_id=request.form["movie_id"]
     reviews.delete_review(id)
     return redirect ("/movie_page/" + str(movie_id))

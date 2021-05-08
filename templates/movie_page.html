@@ -58,17 +58,18 @@ Arvio:
 {{ review[3] }}
 <p>
 {% if session.user_role == True %}
-<form action="/delete_review" method="POST">
+<form action="/delete_review_admin" method="POST">
 <input type="hidden" name="review_id" value={{review[4]}}>
 <input type="hidden" name="movie_id" value={{id}}>
 <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
 <input type="submit" value="Poista">
 </form>
 {% endif %}
-{% if review[4] == session.user_id %}
+{% if session.user_role == False and review[5] == session.user_id %}
 <form action="/delete_review" method="POST">
 <input type="hidden" name= "review_id" value={{review[4]}}>
 <input type="hidden" name= "movie_id" value={{id}}>
+<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
 <input type= "submit" value="Poista">
 </form>
 {% endif %}

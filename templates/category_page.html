@@ -19,7 +19,7 @@
 <form action="/movie_to_category" method="POST">
 <input type="hidden" name="category_id" value={{ id }}>
 Elokuvan nimi:  
-<textarea name="movie_name" rows="1" cols="40"></textarea>
+<input type="text" name="movie_name" size="40">
 <p>
 <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
 <input type="submit" value="Lisää elokuva kategoriaan {{ category_name }}">

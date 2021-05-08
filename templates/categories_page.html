@@ -9,18 +9,18 @@
 <p>
 <form action="/add_category" method="POST" onsubmit="return check(this)">
 Nimi:
-<textarea name="category_name" rows="1" cols="30"></textarea>
+<input type="text" name="category_name" size="30">
 <p>
 <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
 <input type="submit" value="Lisää katogorioihin">
 </form>
 <script>
 function check(form) {
-    if (form.category_name.value.length > 1) {
+    if (form.category_name.value.length < 1) {
         alert("Kategorian nimen tulee olla vähintään 2 merkkiä pitkä.");
         return false;
     }
-    if (form.category_name.value.length < 50) {
+    if (form.category_name.value.length >= 50) {
         alert("Kategorian nimen tulee olla enintään 50 merkkiä pitkä.");
         return false;
     }
