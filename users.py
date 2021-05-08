@@ -52,3 +52,36 @@ def require_admin():
 def check_csrf():
 	if session["csrf_token"] != request.form["csrf_token"]:
 		abort(403)
+
+def list_admins():
+	sql="Select username from users where admin=True ORDER BY username"
+	result=db.session.execute(sql)
+	admins=result.fetchall()
+	return admins
+
+def turn_user_into_admin(username):
+	try:
+		sql="UPDATE users SET admin=True WHERE username=:username"
+		db.session.execute(sql, {"username":username})
+		db.session.commit()
+	except:
+		return False
+	return True
+
+
+def get_number_of_admins():
+	sql="Select count(*) from users where admin=True"
+	result=db.session.execute(sql)
+	number_of_admins=result.fetchone()[0]
+	if number_of_admins != None:
+		return number_of_admins
+	else:
+		return 0
+
+def check_if_admin(username):
+	sql="Select admin from users where username=:username"
+	result=db.session.execute(sql, {"username":username})
+	is_admin=result.fetchone()
+	if is_admin == None:
+		return False
+	return bool(is_admin[0])

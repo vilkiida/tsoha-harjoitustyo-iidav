@@ -49,3 +49,12 @@ def decline(id):
 	sql="Update suggestions SET accepted=2 WHERE id=:id"
 	db.session.execute(sql, {"id":id})
 	db.session.commit()
+
+def suggested_movie_exists(id):
+	sql="Select m.name from movies m, suggestions s where s.name=m.name and s.id=:id" 
+	result=db.session.execute(sql, {"id":id})
+	moviename=result.fetchone()
+	if moviename == None:
+		return False
+	else:
+		return True

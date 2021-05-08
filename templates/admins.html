@@ -1,0 +1,23 @@
+<h1>Elokuva-arvostelut</h1>
+<p>
+<a href="/">Etusivulle</a>
+<p>
+<a href="/logout"> Kirjaudu ulos</a>
+<hr>
+<h3>Tee käyttäjästä ylläpitäjä:<h3>
+<form action="/new_admin" method="POST">
+<p>
+Käyttäjätunnus:
+<input type="text" name="username" size="40">
+<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
+<p>
+<input type="submit" value="Muuta ylläpitäjäksi">
+</form>
+<hr>
+<h2>Ylläpitäjä käyttäjät:</h2>
+<p>Ylläpitäjiä yhteensä: {{ number_of_admins }}<br>
+<hr>
+{% for admin in admins %}
+<h3>{{ admin[0] }}</h3>
+<hr>
+{% endfor %}

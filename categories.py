@@ -56,9 +56,10 @@ def check_movie_in_category(moviename, category_id):
 	id_s=result.fetchall()
 	if id_s != None:
 		for id in id_s:
-			if id[0] == category_id:
+			if int(id[0]) == int(category_id):
 				return True
-	return False
+	else:
+		return False
 
 def delete_movie_in_category(movie_id, category_id):
 	try:

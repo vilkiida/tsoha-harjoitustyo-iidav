@@ -52,7 +52,7 @@ def register():
         password=request.form["password"]
         if users.username_exists_already(username):
             return render_template ("register_error.html", message="Käyttäjätunnus on varattu.")
-        if len(username) > 20 or len(username) < 1:
+        if len(username) >= 20 or len(username) <= 1:
             return render_template("register_error.html", message="Käyttäjätunnuksen täytyy olla 1-20 merkkiä.")
         if password == "":
             return render_template("register_error.html", message="Salasana on tyhjä.")
@@ -129,6 +129,8 @@ def add_movie():
         name=request.form["name"]
         if len(name) < 1 or len(name) > 177:
             return render_template("add_movie_error.html", message="Elokuvan nimi pitää olla 1-177 merkkiä.")
+        if movies.check_if_movie_exists(name):
+            return render_template("add_movie_error.html", message="Tämän niminen elokuva on jo olemassa.")
         year=request.form["year"]
         if len(year) != 4:
             return render_template("add_movie_error.html", message="Vuosiluvussa pitää olla 4 numeroa")
@@ -159,6 +161,8 @@ def accept():
     users.require_admin()
     users.check_csrf()
     id=request.form["id"]
+    if suggestions.suggested_movie_exists(id):
+        return render_template("suggestions_issue.html", message="Tämän niminen elokuva on jo olemassa.")
     suggestions.accept(id)
     return redirect ("/suggestions")
 
@@ -216,7 +220,6 @@ def movie_to_category():
     users.check_csrf()
     category_id=request.form["category_id"]
     movie_name=request.form["movie_name"]
-    print(categories.check_movie_in_category(movie_name, category_id))
     if categories.check_movie_in_category(movie_name, category_id):
         return render_template("category_issue.html", message="Elokuva on jo tässä kategoriassa", id=category_id)
     if not movies.check_if_movie_exists(movie_name):
@@ -258,3 +261,26 @@ def delete_movie_from_category():
         return redirect("/category_page/" + str(category_id))
     else:
         return render_template("category_issue.html", message="Elokuvan poistaminen kategoriasta epäonnistui", id=category_id)
+
+@app.route("/admins")
+def admins():
+    users.require_admin()
+    admins=users.list_admins()
+    number_of_admins=users.get_number_of_admins()
+    return render_template("admins.html", admins=admins, number_of_admins=number_of_admins)
+
+@app.route("/new_admin", methods=["POST"])
+def new_admin():
+    users.require_admin
+    users.check_csrf()
+    username=request.form["username"]
+    if len(username) <= 1 or len(username) >= 20:
+        return render_template("admins_issue.html", message="Käyttäjätunnuksessa oltava 1-20 merkkiä")
+    if not users.username_exists_already(username):
+        return render_template("admins_issue.html", message="Käyttäjää ei löydy.")
+    if users.check_if_admin(username):
+        return render_template("admins_issue.html", message="Kyseinen käyttäjä on jo ylläpitäjä.")
+    if users.turn_user_into_admin(username):
+        return redirect("/admins")
+    else:
+        render_template("admins_issue.html", message="Käyttäjän muuttaminen ylläpitäjäksi epäonnistui")
