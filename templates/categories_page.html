@@ -1,8 +1,6 @@
-<h1>Elokuva-arvostelut</h1>
-<p>
-<a href="/">Etusivulle</a>
-<p>
-<a href="/logout"> Kirjaudu ulos</a>
+{% extends "layout.html" %}
+{% block title %}Kategoriat{% endblock %}
+{% block content %}
 <hr>
 {% if session.user_role == True %}
 <h3>Lisää uusi kategoria:</h3>
@@ -37,3 +35,4 @@ function check(form) {
 </h3>
 <hr>
 {% endfor %}
+{% endblock %}

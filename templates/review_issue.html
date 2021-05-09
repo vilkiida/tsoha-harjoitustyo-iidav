@@ -1,7 +1,8 @@
-<h1>Elokuva-arvostelut</h1>
-<p>
-<p>
+{% extends "layout.html" %}
+{% block title %}Arvostelu_virhe{% endblock %}
+{% block content %}
 <hr>
 {{ message }}
 <p>
 <a href="/movie_page/{{id}}">Takaisin</a>
+{% endblock %}

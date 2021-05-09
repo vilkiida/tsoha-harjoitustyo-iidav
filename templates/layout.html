@@ -1,12 +1,27 @@
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" type= "text/css" href="../static/style.css?v=1.0.0">
+        <link rel="stylesheet" type= "text/css" href="/static/style.css?v=1.0.0">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <div class="header">
-            <h1>Elokuva-arvostelut</h1>
+            <h1>ELOKUVA-ARVOSTELUT</h1>
+            <p>
+            {% if session.username %}
+            Olet kirjautunut tunnuksella {{ session.username }}
+            {% else %}
+            Et ole kirjautunut sisään
+            {% endif %}
+            <p>
+            <nav>
+                <ul>
+                    <li><a href="/">Etusivulle</a></li>
+                    <li><a href="/logout">Kirjaudu ulos</a></li>
+                </ul>
+            </nav>
+            <p>
         </div>
+        {% block content %}{% endblock %}
     </body>
 </html>

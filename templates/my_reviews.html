@@ -1,9 +1,6 @@
-<h1>Elokuva-arvostelut</h1>
-<p>
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
-<p>
-<a href="/">Etusivulle</a><br>
-<a href="/logout">Kirjaudu ulos</a>
+{% extends "layout.html" %}
+{% block title %}Minun arvosteluni{% endblock %}
+{% block content %}
 <hr>
 <h2>Omat arvosteluni:</h2>
 <p>Arvosteluiden määrä: {{ number_of_reviews }}<br>
@@ -23,4 +20,5 @@ Arvio:
 </form>
 <hr>
 {% endfor %}
+{% endblock %}
 

@@ -1,8 +1,6 @@
-<h1>Elokuva-arvostelut</h1>
-<p>
-<a href="/">Etusivulle</a>
-<p>
-<a href="/logout"> Kirjaudu ulos</a>
+{% extends "layout.html" %}
+{% block title %}Kategoria_tyhjä{% endblock %}
+{% block content %}
 {% if session.user_role == True %}
 <hr>
 <p>
@@ -27,3 +25,4 @@ Elokuvan nimi:
 <p>Kategoria on vielä tyhjä.
 <p>
 <a href="/categories"> Takaisin kategorioihin</a>
+{% endblock %}

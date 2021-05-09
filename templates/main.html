@@ -1,19 +1,22 @@
-{% if session.username %}
-<h1>Elokuva-arvostelut</h1>
-<p>
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
-<a href="/logout">Kirjaudu ulos</a>
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
 <hr>
-<a href="/my_reviews">Omat arvostelut</a>
-<a href="/categories">Kategoriat</a>
-{% if session.user_role == False %}        
-<a href="/suggest_movies">Ehdota elokuvia</a>
-{% endif %}
-{% if session.user_role == True %}
-<a href="/add_movie">Lisää elokuva</a>
-<a href="/suggestions">Katso ehdotukset</a>
-<a href="/admins">Ylläpitäjät</a>
-{% endif %}
+<nav>
+    <ul>
+        {% if session.username %} 
+        <li><a href="/my_reviews">Omat arvostelut</a></li>
+        <li><a href="/categories">Kategoriat</a></li>
+        {% if session.user_role == False %}        
+        <li><a href="/suggest_movies">Ehdota elokuvia</a></li>
+        {% endif %}
+        {% if session.user_role == True %}
+        <li><a href="/add_movie">Lisää elokuva</a></li>
+        <li><a href="/suggestions">Katso ehdotukset</a></li>
+        <li><a href="/admins">Ylläpitäjät</a></li>
+        {% endif %}
+    <ul>
+</nav>
 <hr>
 <form action="/search_results" method="GET">
 Haku:
@@ -64,6 +67,6 @@ julkaistu: {{ movie[2] }}
 Ei vielä tunnuksia?
 <a href="/register">Luo uusi tunnus</a>
 {% endif %}
-
+{% endblock %}
 
 

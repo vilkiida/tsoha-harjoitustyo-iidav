@@ -1,8 +1,6 @@
-<h1>Elokuva-arvostelut</h1>
-<p>
-<a href="/">Etusivulle</a>
-<p>
-<a href="/logout"> Kirjaudu ulos</a>
+{% extends "layout.html" %}
+{% block title %}Elokuva_sivu{% endblock %}
+{% block content %}
 <hr>
 <h2>Elokuvan tiedot:</h2>
 <p>
@@ -75,3 +73,4 @@ Arvio:
 {% endif %}
 <hr>
 {% endfor %}
+{% endblock %}

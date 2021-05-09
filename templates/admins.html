@@ -1,8 +1,6 @@
-<h1>Elokuva-arvostelut</h1>
-<p>
-<a href="/">Etusivulle</a>
-<p>
-<a href="/logout"> Kirjaudu ulos</a>
+{% extends "layout.html" %}
+{% block title %}Ylläpitäjät{% endblock %}
+{% block content %}
 <hr>
 <h3>Tee käyttäjästä ylläpitäjä:<h3>
 <form action="/new_admin" method="POST">
@@ -21,3 +19,4 @@ Käyttäjätunnus:
 <h3>{{ admin[0] }}</h3>
 <hr>
 {% endfor %}
+{% endblock %}

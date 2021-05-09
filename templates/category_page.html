@@ -1,8 +1,6 @@
-<h1>Elokuva-arvostelut</h1>
-<p>
-<a href="/">Etusivulle</a>
-<p>
-<a href="/logout"> Kirjaudu ulos</a>
+{% extends "layout.html" %}
+{% block title %}Kategoria{% endblock %}
+{% block content %}
 <hr>
 <p>
 <a href= "/categories">Takaisin kategorioihin</a>
@@ -46,4 +44,4 @@ Julkaistu: {{ movie[1] }}
 {% endif %}
 <hr>
 {% endfor %}
-
+{% endblock %}

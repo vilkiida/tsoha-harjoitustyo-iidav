@@ -1,9 +1,6 @@
-<h1>Elokuva-arvostelut</h1>
-<p>
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
-<p>
-<a href="/">Etusivulle</a><br>
-<a href="/logout">Kirjaudu ulos</a>
+{% extends "layout.html" %}
+{% block title %}Ehdota elokuvaa{% endblock %}
+{% block content %}
 <hr>
 <h2>Ehdota elokuvaa:</h2>
 <form action="/new_suggestion" method="POST">
@@ -21,3 +18,4 @@
 <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
 <input type="submit" value="Ehdota">
 </form>
+{% endblock %}

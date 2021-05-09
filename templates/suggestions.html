@@ -1,9 +1,6 @@
-<h1>Elokuva-arvostelut</h1>
-<p>
-<p>Olet kirjautunut ylläpitäjänä nimellä {{ session.username }}</p>
-<p>
-<a href="/">Etusivulle</a><br>
-<a href="/logout">Kirjaudu ulos</a>
+{% extends "layout.html" %}
+{% block title %}Ehdotukset{% endblock %}
+{% block content %}
 <hr>
 <h2>Ehdotukset:</h2>
 <p>Ehdotusten määrä: {{ number_of_suggestions }}<br>
@@ -28,3 +25,4 @@ Ehdotus käyttäjältä {{ suggestion[5] }}:
 </form>
 <hr>
 {% endfor %}
+{% endblock %}
