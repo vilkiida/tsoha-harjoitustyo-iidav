@@ -5,7 +5,9 @@ def make_suggestion(name, year, genre, description, leading_roles):
 	try:
 		year = int(year)
 		user_id = session["user_id"]
-		sql = "INSERT INTO suggestions (name,year,genre,description,leading_roles, user_id, time,accepted) VALUES (:name, :year, :genre, :description, :leading_roles, :user_id, NOW(),0)"
+		sql = """INSERT INTO suggestions (name, year, genre, description, 
+		leading_roles, user_id, time,accepted) VALUES (:name, :year, :genre, 
+		:description, :leading_roles, :user_id, NOW(),0)"""
 		db.session.execute(sql, {"name":name, "year":year, "genre":genre, "description":description, "leading_roles":leading_roles, "user_id":user_id})
 		db.session.commit()
 	except:
@@ -13,7 +15,9 @@ def make_suggestion(name, year, genre, description, leading_roles):
 	return True
 
 def get_suggestions():
-	sql = "SELECT s.name, s.year, s.genre, s.description, s.leading_roles, u.username, s.time, s.id from suggestions s, users u where s.user_id=u.id and accepted=0 order by s.time"
+	sql = """SELECT s.name, s.year, s.genre, s.description, s.leading_roles, 
+	u.username, s.time, s.id from suggestions s, users u where s.user_id=u.id 
+	and accepted=0 order by s.time"""
 	result = db.session.execute(sql)
 	suggestions = result.fetchall()
 	return suggestions
@@ -41,7 +45,8 @@ def suggestion_to_a_movie(id):
 	genre = info[2]
 	description = info[3]
 	leading_roles = info[4]
-	sql2 = "INSERT INTO movies (name, year, genre, description, leading_roles) VALUES (:name, :year, :genre, :description, :leading_roles)"
+	sql2 = """INSERT INTO movies (name, year, genre, description, 
+	leading_roles) VALUES (:name, :year, :genre, :description, :leading_roles)"""
 	db.session.execute(sql2, {"name":name, "year":year, "genre":genre, "description":description, "leading_roles":leading_roles})
 	db.session.commit()
 

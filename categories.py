@@ -7,7 +7,8 @@ def get_categories():
 	return category_list
 
 def get_category_contents(id):
-	sql = "SELECT m.name, m.year, m.id from movies_in_categories c, movies m where m.id=c.movie_id and c.category_id=:id"
+	sql = """SELECT m.name, m.year, m.id from movies_in_categories c, 
+	movies m where m.id=c.movie_id and c.category_id=:id"""
 	result = db.session.execute(sql, {"id":id})
 	movie_list = result.fetchall()
 	if movie_list == []:
@@ -51,7 +52,8 @@ def add_category(name):
 	db.session.commit()
 
 def check_movie_in_category(moviename, category_id):
-	sql = "SELECT c.category_id from movies_in_categories c, movies m where m.id=c.movie_id and m.name=:moviename"
+	sql = """SELECT c.category_id from movies_in_categories c, 
+	movies m where m.id=c.movie_id and m.name=:moviename"""
 	result = db.session.execute(sql, {"moviename":moviename})
 	id_s = result.fetchall()
 	if id_s != None:
@@ -63,7 +65,8 @@ def check_movie_in_category(moviename, category_id):
 
 def delete_movie_in_category(movie_id, category_id):
 	try:
-		sql = "DELETE from movies_in_categories where movie_id=:movie_id and category_id=:category_id"
+		sql = """DELETE from movies_in_categories where 
+		movie_id=:movie_id and category_id=:category_id"""
 		db.session.execute(sql, {"movie_id":movie_id, "category_id":category_id})
 		db.session.commit()
 	except:

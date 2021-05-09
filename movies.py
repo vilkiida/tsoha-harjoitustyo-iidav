@@ -19,13 +19,16 @@ def get_movie_list_oldest():
 	return movies
 
 def get_movie_list_best():
-	sql = "SELECT m.id, m.name, m.year FROM movies m, (SELECT movie_id, AVG(grade) as tulos from reviews group by movie_id) k where k.movie_id=m.id ORDER BY tulos DESC"
+	sql = """SELECT m.id, m.name, m.year FROM movies m, 
+	(SELECT movie_id, AVG(grade) as tulos from reviews group by movie_id) k 
+	where k.movie_id=m.id ORDER BY tulos DESC"""
 	result = db.session.execute(sql)
 	movies = result.fetchall()
 	return movies
 	
 def get_movie_list_worst():
-	sql = "SELECT m.id, m.name, m.year FROM movies m, (SELECT movie_id, AVG(grade) as tulos from reviews group by movie_id) k where k.movie_id=m.id ORDER BY tulos"
+	sql = """SELECT m.id, m.name, m.year FROM movies m, (SELECT movie_id, AVG(grade) 
+	as tulos from reviews group by movie_id) k where k.movie_id=m.id ORDER BY tulos"""
 	result = db.session.execute(sql)
 	movies = result.fetchall()
 	return movies

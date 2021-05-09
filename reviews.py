@@ -1,7 +1,8 @@
 from db import db
 from flask import session
 def get_reviews(movie_id):
-	sql = "SELECT u.username, r.review, r.grade, r.time, r.id, u.id FROM reviews r, users u where movie_id=:movie_id and u.id=r.user_id"
+	sql = """SELECT u.username, r.review, r.grade, r.time, r.id, u.id 
+	FROM reviews r, users u where movie_id=:movie_id and u.id=r.user_id"""
 	result = db.session.execute(sql, {"movie_id":movie_id})
 	reviews = result.fetchall()
 	return reviews
@@ -9,7 +10,8 @@ def get_reviews(movie_id):
 def create_review(movie_id, grade, review):
 	try:
 		user_id = session["user_id"]
-		sql = "INSERT INTO reviews (user_id, movie_id, grade, review, time) VALUES (:user_id, :movie_id, :grade, :review, Now())"
+		sql = """INSERT INTO reviews (user_id, movie_id, grade, review, time) 
+		VALUES (:user_id, :movie_id, :grade, :review, Now())"""
 		db.session.execute(sql, {"user_id":user_id, "movie_id":movie_id, "grade":grade, "review":review})
 		db.session.commit()
 	except:
@@ -37,7 +39,8 @@ def get_average(movie_id):
 
 def get_my_reviews():
 	user_id = session["user_id"]
-	sql = "Select m.name, r.review, r.grade, r.time, r.id from reviews r, movies m where r.user_id=:user_id and m.id=r.movie_id"
+	sql = """Select m.name, r.review, r.grade, r.time, r.id from reviews r, 
+	movies m where r.user_id=:user_id and m.id=r.movie_id"""
 	result = db.session.execute(sql, {"user_id":user_id})
 	my_reviews = result.fetchall()
 	return my_reviews
