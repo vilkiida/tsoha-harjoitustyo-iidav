@@ -1,5 +1,4 @@
-# tsoha-harjoitustyo-iidav
-## Leffa-arvostelu -sovellus:
+# ELOKUVA-ARVOSTELU -sovellus
 Sovelluksessa on listattuna elokuvia tietoineen ja käyttäjä voi lukea niille annettuja arvosteluja tai tehdä arvosteluja itse. Sovellusta käytetään joko peruskäyttäjänä tai ylläpitäjänä.
 
 ###  Sovelluksen ominaisuudet:
