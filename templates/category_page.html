@@ -2,9 +2,11 @@
 {% block title %}Kategoria{% endblock %}
 {% block content %}
 <hr>
-<p>
-<a href= "/categories">Takaisin kategorioihin</a>
-<p>
+<nav>
+    <ul>
+        <li><a href= "/categories">Takaisin kategorioihin</a></li>
+    </ul>
+</nav>
 {% if session.user_role == True %}
 <hr>
 <p>
@@ -25,23 +27,27 @@ Elokuvan nimi:
 <hr>
 <h2>Elokuvat kategoriassa {{ category_name }}:</h2>
 <hr>
-{% for movie in movies %}
-<h3><a href="/movie_page/{{ movie[2] }}">{{ movie[0] }}</a></h3>
-Julkaistu: {{ movie[1] }}
-{% if session.user_role == True %}
-<form action="/delete_movie" method="POST">
 <p>
-<input type="hidden" name="movie_id" value={{movie[2]}}>
-<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
-<input type="submit" value="Poista elokuva">
-</form>
-<form action="/delete_movie_from_category" method="POST">
-<input type="hidden" name="category_id" value={{id}}>
-<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
-<input type="hidden" name="movie_id" value={{movie[2]}}>
-<input type="submit" value="Poista kategoriasta">
-</form>
-{% endif %}
-<hr>
+{% for movie in movies %}
+<div class="listing">
+    <h3><a href="/movie_page/{{ movie[2] }}">{{ movie[0] }}</a></h3>
+    Julkaistu: {{ movie[1] }}
+    {% if session.user_role == True %}
+    <form action="/delete_movie" method="POST">
+    <p>
+    <input type="hidden" name="movie_id" value={{movie[2]}}>
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
+    <input type="submit" value="Poista elokuva">
+    </form>
+    <form action="/delete_movie_from_category" method="POST">
+    <input type="hidden" name="category_id" value={{id}}>
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
+    <input type="hidden" name="movie_id" value={{movie[2]}}>
+    <input type="submit" value="Poista kategoriasta">
+    </form>
+    <p>
+    {% endif %}
+</div>
+<p>
 {% endfor %}
 {% endblock %}

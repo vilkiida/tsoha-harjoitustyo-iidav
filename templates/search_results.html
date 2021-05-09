@@ -2,13 +2,23 @@
 {% block title %}Hakutulokset{% endblock %}
 {% block content %}
 <hr>
+<form action="/search_results" method="GET">
+Haku:
+<input type="text" name="query">
+<input type="submit" value="Hae">
+</form>
+<hr>
 <h2>Tulokset:</h2>
+<hr>
 <p>
-<hr>
 {% for result in results %}
-<h3><a href="/movie_page/{{ result[0] }}">{{ result[1] }}</a>
-</h3>
-Julkaisuvuosi: {{ result[2] }}
-<hr>
+<div class="listing">
+    <p>
+    <h3><a href="/movie_page/{{ result[0] }}">{{ result[1] }}</a>
+    </h3>
+    Julkaisuvuosi: {{ result[2] }}
+    <p>
+</div>
+<p>
 {% endfor %}
 {% endblock %}

@@ -5,20 +5,24 @@
 <h2>Omat arvosteluni:</h2>
 <p>Arvosteluiden määrä: {{ number_of_reviews }}<br>
 <hr>
+<p>
 {% for review in mine %}
-<h4>Elokuvalle {{ review[0] }} antamasi arvosana:   {{ review [2] }}<br>
-Arvio:
-</h4>
-{{ review[1] }}
+<div class="listing">
+    <h4>Elokuvalle {{ review[0] }} antamasi arvosana:   {{ review [2] }}<br>
+    Arvio:
+    </h4>
+    {{ review[1] }}
+    <p>
+    {{ review[3] }}
+    <p>
+    <form action="/delete_my_review" method="POST">
+    <input type="hidden" name="review_id" value={{review[4]}}>
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
+    <input type="submit" value="poista">
+    </form>
+    <p>
+</div>
 <p>
-{{ review[3] }}
-<p>
-<form action="/delete_my_review" method="POST">
-<input type="hidden" name="review_id" value={{review[4]}}>
-<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
-<input type="submit" value="poista">
-</form>
-<hr>
 {% endfor %}
 {% endblock %}
 

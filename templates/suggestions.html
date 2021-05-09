@@ -5,24 +5,29 @@
 <h2>Ehdotukset:</h2>
 <p>Ehdotusten määrä: {{ number_of_suggestions }}<br>
 <hr>
+<p>
 {% for suggestion in suggestions %}
-Ehdotus käyttäjältä {{ suggestion[5] }}:
-<h4>{{ suggestion[0] }}</h4>
-<p>Julkaisuvuosi: {{ suggestion[1] }}<br>
-<p>Genret: {{ suggestion[2] }}<br>
-<p>Pääroolit: {{ suggestion[4] }}<br>
-<p>Kuvaus: {{ suggestion[3] }}<br>
-<p>{{ suggestion[6] }}<br>
-<form action="/accept" method="POST">
-<input type="hidden" name="id" value={{ suggestion[7] }}>
-<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
-<input type="submit" value="Hyväksy">
-</form>
-<form action="/decline" method="POST">
-<input type="hidden" name="id" value={{ suggestion[7] }}>
-<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
-<input type="submit" value="Hylkää">
-</form>
-<hr>
+<div class="listing">
+    <h3>Ehdotus käyttäjältä {{ suggestion[5] }}:</h3>
+    <h4>Elokuvan nimi: {{ suggestion[0] }}</h4>
+    <p>Julkaisuvuosi: {{ suggestion[1] }}<br>
+    <p>Genret: {{ suggestion[2] }}<br>
+    <p>Pääroolit: {{ suggestion[4] }}<br>
+    <p>Kuvaus: {{ suggestion[3] }}<br>
+    <p>{{ suggestion[6] }}<br>
+    <form action="/accept" method="POST">
+    <input type="hidden" name="id" value={{ suggestion[7] }}>
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
+    <input type="submit" value="Hyväksy">
+    </form>
+    <p>
+    <form action="/decline" method="POST">
+    <input type="hidden" name="id" value={{ suggestion[7] }}>
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
+    <input type="submit" value="Hylkää">
+    </form>
+    <p>
+</div>
+<p>
 {% endfor %}
 {% endblock %}

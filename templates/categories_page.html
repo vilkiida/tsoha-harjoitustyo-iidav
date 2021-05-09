@@ -30,9 +30,11 @@ function check(form) {
 <h2>Kategoriat:</h2>
 <p>
 <hr>
+<p>
 {% for category in categories %}
-<h3><a href="/category_page/{{ category[0] }}">{{ category[1] }}</a>
-</h3>
-<hr>
+<div class="category">
+    <a href="/category_page/{{ category[0] }}">{{ category[1] }}</a>
+</div>
+<p>
 {% endfor %}
 {% endblock %}

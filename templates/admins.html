@@ -15,8 +15,11 @@ Käyttäjätunnus:
 <h2>Ylläpitäjä käyttäjät:</h2>
 <p>Ylläpitäjiä yhteensä: {{ number_of_admins }}<br>
 <hr>
+<p>
 {% for admin in admins %}
-<h3>{{ admin[0] }}</h3>
-<hr>
+<div class="listing">
+    <h3>{{ admin[0] }}</h3>
+</div>
+<p>
 {% endfor %}
 {% endblock %}
