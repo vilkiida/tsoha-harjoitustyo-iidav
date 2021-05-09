@@ -1,7 +1,7 @@
 # ELOKUVA-ARVOSTELU -sovellus
 Sovelluksessa on listattuna elokuvia tietoineen ja käyttäjä voi lukea niille annettuja arvosteluja tai tehdä arvosteluja itse. Sovellusta käytetään joko peruskäyttäjänä tai ylläpitäjänä.
 
-###  Sovelluksen ominaisuudet:
+##  Sovelluksen ominaisuudet:
 
 - [x] Käyttäjä voi luoda itselleen tunnuksen ja kirjautua sillä sisään sekä ulos.
 - [x] Käyttäjä näkee listan elokuvan nimiä ja klikkaamalla nimeä, pääsee näkemään tietoa elokuvasta (kuten julkaisuajankohta, genre, kuvaus, päähenkilöiden esittäjät)
