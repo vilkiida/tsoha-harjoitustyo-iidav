@@ -15,7 +15,7 @@ Sovelluksessa on listattuna elokuvia tietoineen ja käyttäjä voi lukea niille 
 - [x] Pääsivun elokuvalistan voi lajitella halutessaan joko: uusimmasta-vanhimpaan, vanhimmasta-uusimpaan, parhaimmasta-huonoimpaan, huonoimmasta-parhaimpaan sekä viimeisimmäksi lisätyin -järjestyksessä. Näistä vaihtoehdoista parhaimmasta-huonoimpaan ja huonoimmasta-parhaimpaan vaihtoehdoissa näytetään ainoastaan elokuvat jotka ovat saaneet arvioita (muuten arviotta jääneet olisivat automaattisesti huonoimpia). Jos mitään valintaa ei ole tehty, näytetään elokuvat automaattisesti lisäysjärjestyksessä.
 
 ## Sovelluksen testaaminen Herokussa:
-Sovellusta voi käyttää tavallisena käyttäjänä esim. luomalla uuden tunnuksen. Ylläpitäjänä sovellusta voi testata tunnuksilla:
+Sovellusta voi käyttää tavallisena käyttäjänä esim. luomalla uuden tunnuksen. Ylläpitäjänä sovellusta voi testata esimerkiksi tunnuksilla:
 - Käyttäjätunnus: "ylläpitäjä"
 - Salasana: "ylläpitäjä"
 
