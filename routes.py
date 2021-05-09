@@ -292,3 +292,7 @@ def new_admin():
         return redirect("/admins")
     else:
         render_template("admins_issue.html", message="Käyttäjän muuttaminen ylläpitäjäksi epäonnistui")
+
+@app.route("/test")
+def test():
+    return render_template("layout.html")

@@ -10,10 +10,18 @@ nav li{
     margin: .2em;
 }
 .header {
-    background: lightsteelblue;
+    background: lightcoral;
+    color: white;
+    padding: 1em;
     font-weight: bold;
-    padding: 2em 1em;
-    font-size: 2em;
+    font-size: 1em;
     border-radius: .5em;
-    margin-top: .5em;
+    margin-top: .2em;
+    margin: auto;
+    max-width: 45em;
+}
+.header li{
+    display: inline-block;
+    color: white;
+    font-size: .7em
 }
