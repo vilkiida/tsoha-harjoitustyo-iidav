@@ -3,6 +3,7 @@ body {
     max-width: 75em;
     font-family: 'Helvetica';
     background: white;
+    font-weight: normal;
 }
 nav ul{
     padding: 0;
