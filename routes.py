@@ -103,16 +103,18 @@ def new_suggestion():
         return render_template("suggestion_error.html", message="Elokuvan nimi pitää olla 1-177 merkkiä.")
     year=request.form["year"]
     if len(year) != 4:
-            return render_template("suggestion_error.html", message="Vuosiluvussa pitää olla 4 numeroa")
+        return render_template("suggestion_error.html", message="Vuosiluvussa pitää olla 4 numeroa")
+    if int(year) > 2021:
+        return render_template("suggestion_error.html", message="Julkaisu vuosi ei voi olla uudempi kuin 2021")
     genres=request.form["genre"]
     if genres == "":
-            return render_template("suggestion_error.html", message="Elokuvalla pitää olla edes yksi genre")
+        return render_template("suggestion_error.html", message="Elokuvalla pitää olla edes yksi genre")
     description=request.form["description"]
     if description == "":
-            return render_template("suggestion_error.html", message="Elokuvalla pitää olla kuvaus")
+        return render_template("suggestion_error.html", message="Elokuvalla pitää olla kuvaus")
     leading_roles=request.form["leading_roles"]
     if leading_roles == "":
-            return render_template("add_movie_error.html", message="Elokuvalla pitää olla edes yksi päärooli")
+        return render_template("add_movie_error.html", message="Elokuvalla pitää olla edes yksi päärooli")
 
     if suggestions.make_suggestion(name, year, genres, description, leading_roles):
         return render_template("new_suggestion.html")
@@ -134,6 +136,8 @@ def add_movie():
         year=request.form["year"]
         if len(year) != 4:
             return render_template("add_movie_error.html", message="Vuosiluvussa pitää olla 4 numeroa")
+        if int(year) > 2021:
+            return render_template("add_movie_error.html", message="Julkaisu vuosi ei voi olla uudempi kuin 2021")
         genres=request.form["genre"]
         if genres == "":
             return render_template("add_movie_error.html", message="Elokuvalla pitää olla edes yksi genre")
